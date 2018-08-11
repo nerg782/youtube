@@ -16,10 +16,8 @@ export const getAllVideos = (pageToken) => async (dispatch) => {
     try {
         let response = {};
         if(!pageToken){
-            console.log('Here', `${urlBase}?${queryString.stringify(query)}`);
             response = await axios.get(`${urlBase}?${queryString.stringify(query)}`);
         }else{
-            console.log('Here', `${urlBase}?${queryString.stringify({ ...query, pageToken })}`);
             response = await axios.get(`${urlBase}?${queryString.stringify({ ...query, pageToken })}`);
         }
         console.log(response.data);
