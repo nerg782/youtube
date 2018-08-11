@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import history from '../helpers/history';
 import {
   getSearchResult,
 } from '../actions/SearchAction';
@@ -8,34 +9,42 @@ import {
 class SearchView extends React.Component {
 
   componentDidMount(){
-    let query = this.props.match.params.query;
-    
-    this.props.getSearchResult(query);
+    let search = this.props.match.params.search;
+    this.props.getSearchResult(search);
   }
 
   onClickVideo = (id) => (event) =>{
-    console.log(id);
+    if (id) {
+      history.push(`/video/${id}`);
+    }else{
+      alert("No podemos reproducirlo, es un canal");
+    }
   }
 
-  onLoadMore = (query,nextPageToken) => (event) =>{
-    this.props.getSearchResult(query,nextPageToken);
+  onLoadMore = (search, nextPageToken) => (event) =>{
+    this.props.getSearchResult(search, nextPageToken);
   } 
 
   renderSearchList() {
-    return this.props.items.map((item) => (
-      <div key={item.id} className="col-3">
+    
+    return this.props.items.map((item) => {
+      console.log(item.id.videoId);
+      
+      return(
+      <div key={item.id} className="col-9">
+        <a href="#" style={{"text-decoration":"none", "color":"black"}} onClick={this.onClickVideo(item.id.videoId)}>
         <div className="card">
-          <a href="#" onClick={this.onClickVideo(item.id)}>
-          <img className="card-img-top Video" src={item.snippet.thumbnails.high.url} alt="Card image cap" />
-          </a>   
           <div className="card-body">
-            <h6 className="card-title">{item.snippet.title.substr(0,40)}...</h6>
-            <p className="card-text">{item.snippet.description.substr(0,120)}...</p>
-            <p className="card-text"><small className="text-muted">Published At : {item.snippet.publishedAt}</small></p>
+              <img className="img-thumbnail mr-2 rounded float-left Video" style={{"width":"200px", "height":"200px"}} src={item.snippet.thumbnails.high.url} alt="Card image cap" />
+            <h6 className="card-title mt-1"><b>Title: {item.snippet.title}</b></h6>
+            <p className="card-text mt-1">{item.snippet.description}</p>
+            <p className="card-text mt-1"><small className="text-muted">Published At : {item.snippet.publishedAt}</small></p>
           </div>
         </div>
+        </a>   
       </div>    
-    ));
+    )
+    });
   }
 
   render() {

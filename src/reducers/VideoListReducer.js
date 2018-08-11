@@ -1,7 +1,7 @@
 import concat from 'lodash/concat';
 import {
-    GET_VIDEO_COMMENTS
-} from '../actions/VideoViewAction';
+    GET_VIDEOS
+} from '../actions/VideoListAction';
 
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 const videos = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
-        case GET_VIDEO_COMMENTS:
+        case GET_VIDEOS:
             const currentItems = [...state.items];
             const { items, pageInfo, nextPageToken } = payload;
             console.log({ items, pageInfo, nextPageToken });

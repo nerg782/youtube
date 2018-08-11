@@ -1,5 +1,6 @@
 import React from 'react';
 import history from '../helpers/history';
+import img from '../img/YouTube_Logo_2017.svg'
 
 class NavBar extends React.Component {
 
@@ -12,21 +13,20 @@ class NavBar extends React.Component {
 
     render() {
         return (
-        <nav className="navbar navbar-light bg-light">            
+        <nav className="navbar navbar-light NavBar">            
             <div className="container">
-                <div className="row">
-                    <div className="col-md">
+                <div className="row" style={{"width":"100%"}}>
+                    <div className="col-md-3">
                         <a className="navbar-brand" href="#">
-                            <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" className="d-inline-block align-top" alt=""/>
-                            Bootstrap
+                            <img src={img} style={{"width":"60px", "height":"40px"}} className="d-inline-block align-top" alt=""/>
                         </a>                        
                     </div>
-                    <div className="col-md">
+                    <div className="col-md-6" style={{"width":"100%"}}>
                         <form className="form-inline">
-                            <div className="input-group">
-                            <input id="searchBar" type="search" className="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1" />
+                            <div className="input-group" style={{"width":"100%"}}>
+                            <input id="searchBar" style={{"margin-top":"3px"}} type="search" className="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1" />
                             <div className="input-group-prepend">
-                                <button className="input-group-text btn btn-light" onClick={this.searchClick()} id="basic-addon1">@</button>
+                                <button className="input-group-text btn btn-light" style={{"margin-top":"3px"}} onClick={this.searchClick()} id="basic-addon1">Go!</button>
                             </div>
                             </div>
                         </form>

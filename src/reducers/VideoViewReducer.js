@@ -1,7 +1,7 @@
 import concat from 'lodash/concat';
 import {
     GET_VIDEO_COMMENTS
-} from '../actions/VideoListAction';
+} from '../actions/VideoViewAction';
 
 
 const initialState = {

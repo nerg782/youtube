@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import history from '../helpers/history';
 import {
   getAllVideos,
 } from '../actions/VideoListAction';
@@ -12,7 +13,7 @@ class VideoList extends React.Component {
   }
 
   onClickVideo = (id) => (event) =>{
-    console.log(id);
+    history.push(`/video/${id}`);
   }
 
   onLoadMore = (nextPageToken) => (event) =>{
@@ -22,14 +23,14 @@ class VideoList extends React.Component {
   renderVideoList() {
     return this.props.items.map((item) => (
       <div key={item.id} className="col-3">
-        <div className="card">
-          <a href="#" onClick={this.onClickVideo(item.id)}>
-          <img className="card-img-top Video" src={item.snippet.thumbnails.high.url} alt="Card image cap" />
-          </a>   
+        <div className="card Video-Description">
           <div className="card-body">
-            <h6 className="card-title">{item.snippet.title.substr(0,40)}...</h6>
-            <p className="card-text">{item.snippet.description.substr(0,120)}...</p>
-            <p className="card-text"><small className="text-muted">Published At : {item.snippet.publishedAt}</small></p>
+            <a href="javascript:void(0)" onClick={this.onClickVideo(item.id)}>
+            <img className="card-img-top Video" src={item.snippet.thumbnails.high.url} alt="Card image cap" />
+            </a>   
+            <h6 className="card-title description-Title">{item.snippet.title.substr(0,40)}...</h6>
+            <p className="card-text description-Text ">{item.snippet.description.substr(0,100)}...</p>
+            <p className="card-text text-small"><small className="text-muted">Published At : {item.snippet.publishedAt.substr(0,10)}</small></p>
           </div>
         </div>
       </div>    
@@ -40,9 +41,10 @@ class VideoList extends React.Component {
     console.log(this.props.items);
     return (
       <div className="container">
-        <div className="row">
+        <div className="row" style={{"backgroundColor":"#fafafa"}}>
           {this.renderVideoList()}
         </div>
+        <br />
         {
           this.props.pageInfo &&
           this.props.pageInfo.totalResults > this.props.items.length && 

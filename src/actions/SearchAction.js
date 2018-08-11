@@ -8,14 +8,11 @@ const urlBase = 'https://www.googleapis.com/youtube/v3/search';
 
 export const GET_SEARCH_RESULT = 'GET_SEARCH_RESULT';
 
-export const getSearchResult = (query,pageToken) => async (dispatch) => {
-    console.log('aqui');
-    
-    console.log(query);
-    
+export const getSearchResult = (search, pageToken) => async (dispatch) => {
+    console.log('aqui', search);
     const query = {
         part: 'snippet',
-        q: query,
+        q: search,
         key: 'AIzaSyBrph29zfBigS-DYyvG4VYibZmLzkboov0',
         maxResults: 20,
     };
